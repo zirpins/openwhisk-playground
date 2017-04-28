@@ -23,9 +23,9 @@ FIBONACCI_API_URL = os.environ['FIBONACCI_API_URL']
 print "FIBONACCI_API_URL is: " + FIBONACCI_API_URL
 
 def main():
-	checkHenry(25, 75025)
+	checkFibonacci(25, 75025)
 
-def checkHenry(index, number):
+def checkFibonacci(index, number):
 	print("Verify that 25th fibonacci number is 75025 (GET)")
 	response=requests.get(FIBONACCI_API_URL)
 	result = json.loads(response.text)
