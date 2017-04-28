@@ -6,8 +6,8 @@
  */
 function fibo(i) {
     if (i < 1) return -1;
-    else if (i === 1) return 1;
-    else if (i === 2) return 1;
+    else if (i == 1) return 1;
+    else if (i == 2) return 1;
     else return fibo(i - 1) + fibo(i - 2);
 }
 
@@ -38,7 +38,7 @@ function myAction(params) {
 
         var n = fibo(params.index);
 
-        if (n === -1) {
+        if (n == -1) {
             console.log(errors.e2);
             reject(errors.e2);
         } else {
