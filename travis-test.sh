@@ -33,8 +33,8 @@ touch local.env #Configurations defined in travis-ci console
 echo "Deploying wsk actions, etc."
 ./deploy.sh --install
 
-echo "Find and set Cat API URL"
-export CAT_API_URL=`wsk api-experimental list | tail -1 | awk '{print $5}'`
+echo "Find and set Fibonacci API URL"
+export FIBONACCI_API_URL=`wsk api-experimental list | tail -1 | awk '{print $5}'`
 
 echo "Running pythontests"
 python3 --version

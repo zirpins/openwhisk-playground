@@ -31,10 +31,9 @@ def checkHenry(index, number):
 	result = json.loads(response.text)
 
 	if response.status_code != 200 or \
-	   not 'id' in result or \
-	   result["name"] != "Henry" or \
-	   result["color"] != color or \
-	   result["id"] != catID:
+	   not 'index' in result or \
+	   result["index"] != index or \
+	   result["number"] != number:
 	   	print("Failed to verify fibonacci computation. Response: " + response.text)
 	   	exit(1)
 
