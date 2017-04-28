@@ -27,7 +27,7 @@ def main():
 
 def checkFibonacci(index, number):
 	print("Verify that 25th fibonacci number is 75025 (GET)")
-	response=requests.get(FIBONACCI_API_URL+"?index="+index)
+	response=requests.get(FIBONACCI_API_URL+"?index="+str(index))
 	result = json.loads(response.text)
 
 	if response.status_code != 200 or \
