@@ -1,14 +1,14 @@
 /**
  * This function computes a fibonacci mumber
  *
- * @param   n fibonacci sequence index
+ * @param   i fibonacci sequence index
  * @return  the fibonacci number
  */
-function fibo(n) {
-    if (n < 1) return -1;
-    else if (n === 1) return 1;
-    else if (n === 2) return 1;
-    else return fibo(n - 1) + fibo(n - 2);
+function fibo(i) {
+    if (i < 1) return -1;
+    else if (i === 1) return 1;
+    else if (i === 2) return 1;
+    else return fibo(i - 1) + fibo(i - 2);
 }
 
 /**
