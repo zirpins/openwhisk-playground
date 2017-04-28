@@ -1,0 +1,10 @@
+{
+  "name": "fibonacci",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zirpins/openwhisk-playground.git"
+  },
+  "version": "1.0.0",
+  "main": "index.js"
+}

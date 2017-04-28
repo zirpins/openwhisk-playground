@@ -4,19 +4,19 @@
  * @param   n fibonacci sequence index
  * @return  the fibonacci number
  */
-function fibo(n){
-  if (n<0) return -1;
-    else if (n==0) return 1;
-      else if (n==1) return 1;
-        else return fibo(n-1);
+function fibo(n) {
+    if (n < 1) return -1;
+    else if (n === 1) return 1;
+    else if (n === 2) return 1;
+    else return fibo(n - 1) + fibo(n - 2);
 }
 
 /**
  * Error codes
  */
 var errors = {
-  1:"index missing",
-  2:"index sub zero"
+    e1: "index missing",
+    e2: "index too small"
 };
 
 /**
@@ -27,26 +27,29 @@ var errors = {
  */
 function myAction(params) {
 
-  return new Promise(function(resolve, reject) {
-  
-    if (! params.i){
-      console.log(errors.1);
-      reject(errors.1);
-    }
-    
-    console.log('Calculating fibonacci number '+params.i);
+    return new Promise(function (resolve, reject) {
 
-    var n = fibo(params.i);
+        if (!params.index) {
+            console.log(errors.e1);
+            reject(errors.e1);
+        }
 
-    if (n==-1) {
-        console.log(errors.2);
-        reject(errors.2);
-    } else {
-        console.log("result:"+n);
-        resolve(n);
-    };
+        console.log('Calculating fibonacci number ' + params.index);
 
-  });
+        var n = fibo(params.index);
+
+        if (n === -1) {
+            console.log(errors.e2);
+            reject(errors.e2);
+        } else {
+            console.log("resulting number:" + n);
+            resolve({
+                index: params.index,
+                number: n
+            });
+        }
+
+    });
 }
 
 exports.main = myAction;

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright 2016 IBM Corp. All Rights Reserved.
+# Copyright 2017 IBM Corp. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the “License”);
 # you may not use this file except in compliance with the License.
@@ -14,32 +14,42 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Capture the namespace where actions will be created
-WSK='wsk' # Set if not in your $PATH
-CURRENT_NAMESPACE=`$WSK property get --namespace | sed -n -e 's/^whisk namespace//p' | tr -d '\t '`
-echo "Current namespace is $CURRENT_NAMESPACE."
+# Load configuration variables
+source local.env
+
+function usage() {
+  echo -e "Usage: $0 [--install,--uninstall,--env]"
+}
 
 function install() {
-  $WSK action create handler handler.js
+  echo -e "Installing OpenWhisk actions, triggers, and rules for openwhisk-playground.."
 
-  $WSK trigger create every-20-seconds \
-    --feed  /whisk.system/alarms/alarm \
-    --param cron '*/20 * * * * *' \
-    --param maxTriggers 6
+  echo "Installing GET fibonacci Action"
+  cd actions/fibonacci
+  npm install
+  zip -rq action.zip *
+  wsk action create fibonacci-get --kind nodejs:6 action.zip
+  wsk api-experimental create /v1 /fibonacci get fibonacci-get
+  cd ../..
 
-  $WSK rule create \
-    invoke-periodically \
-    every-20-seconds \
-    handler
+  echo -e "Install Complete"
 }
 
 function uninstall() {
-  $WSK rule disable invoke-periodically
-  $WSK rule delete invoke-periodically
-  $WSK trigger delete every-20-seconds
-  $WSK action delete handler
+  echo -e "Uninstalling..."
+
+  echo "Removing API actions..."
+  wsk api-experimental delete /v1
+
+  echo "Removing actions..."
+  wsk action delete fibonacci-get
+
+  echo -e "Uninstall Complete"
 }
 
+function showenv() {
+  echo -e MY_VARIABLE="$MY_VARIABLE"
+}
 
 case "$1" in
 "--install" )
@@ -47,6 +57,9 @@ install
 ;;
 "--uninstall" )
 uninstall
+;;
+"--env" )
+showenv
 ;;
 * )
 usage
