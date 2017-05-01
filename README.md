@@ -1,4 +1,4 @@
-# Openwhisk Playground
+# Openwhisk Playground [![Build Status](https://secure.travis-ci.org/zirpins/openwhisk-playground.png?branch=master)](http://travis-ci.org/zirpins/openwhisk-playground)
 
 Sample project for setting up test-driven development of 
 OpenWhisk actions using javascript.
