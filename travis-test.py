@@ -16,27 +16,24 @@
 import os
 import requests
 import json
-import time
-from subprocess import call
 
 FIBONACCI_API_URL = os.environ['FIBONACCI_API_URL']
-print "FIBONACCI_API_URL is: " + FIBONACCI_API_URL
+print("FIBONACCI_API_URL is: " + FIBONACCI_API_URL)
+
 
 def main():
-	checkFibonacci(25, 75025)
+    checkFibonacci(25, 75025)
+
 
 def checkFibonacci(index, number):
-	print("Verify that 25th fibonacci number is 75025 (GET)")
-	response=requests.get(FIBONACCI_API_URL+"?index="+str(index))
-	result = json.loads(response.text)
+    print("Verify that 25th fibonacci number is 75025 (GET)")
+    response = requests.get(FIBONACCI_API_URL+"?index="+str(index))
+    result = json.loads(response.text)
 
-	if response.status_code != 200 or \
-	   not 'index' in result or \
-	   result["index"] != index or \
-	   result["number"] != number:
-	   	print("Failed to verify fibonacci computation. Response: " + response.text)
-	   	exit(1)
+    if response.status_code != 200 or 'index' not in result or result["index"] != index or result["number"] != number:
+        print("Failed to verify fibonacci computation. Response: " + response.text)
+        exit(1)
 
-	print("success")
+    print("success")
 
 main()

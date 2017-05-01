@@ -2,7 +2,7 @@
  * Created by zirpins on 01.05.17.
  */
 
-var fibonacci = require('fibonacci');
+var fibonacci = require('./fibonacci');
 
 /**
  * Error codes
@@ -27,9 +27,11 @@ function myAction(params) {
             reject(errors.e1);
         }
 
-        console.log('Calculating fibonacci number ' + params.index);
+        var i = parseInt(params.index);
 
-        var n = fibonacci.get(params.index);
+        console.log('Calculating fibonacci number ' + i);
+
+        var n = fibonacci.get(i);
 
         if (n == -1) {
             console.log(errors.e2);
@@ -37,8 +39,8 @@ function myAction(params) {
         } else {
             console.log("resulting number:" + n);
             resolve({
-                index: params.index,
-                number: n
+                'index' : i,
+                'number' : n
             });
         }
 

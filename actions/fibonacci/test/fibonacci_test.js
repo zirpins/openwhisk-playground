@@ -1,6 +1,6 @@
 'use strict';
 
-var fibonacci = require('../lib/fibonacci.js');
+var fibonacci = require('../lib/fibonacci');
 
 /*
   ======== A Handy Little Nodeunit Reference ========

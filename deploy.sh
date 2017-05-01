@@ -26,8 +26,17 @@ function install() {
 
   echo "Installing GET fibonacci Action"
   cd actions/fibonacci
-  npm install
-  zip -rq action.zip *
+  # preserve dev deps
+  mv node_modules .mod
+  # install only prod deps
+  npm install --only=production
+  # zip all but skip the dev deps
+  zip -rq action.zip package.json lib node_modules
+  # delete prod deps
+  rm -rf node_modules
+  # recover dev deps
+  mv .mod node_modules
+  # install zip in openwhisk
   wsk action create fibonacci-get --kind nodejs:6 action.zip
   wsk api-experimental create /v1 /fibonacci get fibonacci-get
   cd ../..
