@@ -30,10 +30,10 @@ exports['get'] = {
   'no args': function(test) {
     test.expect(4);
     // tests here
+    test.equal(fibonacci.get(0), -1);
     test.equal(fibonacci.get(1), 1);
     test.equal(fibonacci.get(2), 1);
     test.equal(fibonacci.get(3), 2);
-    test.equal(fibonacci.get(25), 75025);
     test.done();
   },
 };

@@ -40,7 +40,8 @@ function myAction(params) {
             console.log("resulting number:" + n);
             resolve({
                 'index' : i,
-                'number' : n
+                'number' : n,
+                'provider' : params.PROVIDER_NAME
             });
         }
 

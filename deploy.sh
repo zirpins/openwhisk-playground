@@ -37,7 +37,8 @@ function install() {
   # recover dev deps
   mv .mod node_modules
   # install zip in openwhisk
-  wsk action create fibonacci-get --kind nodejs:6 action.zip
+  wsk action create fibonacci-get --kind nodejs:6 action.zip \
+    --param "PROVIDER_NAME" $PROVIDER_NAME
   wsk api-experimental create /v1 /fibonacci get fibonacci-get
   cd ../..
 
