@@ -10,7 +10,7 @@ implemented based on this
 [project](https://github.com/IBM/openwhisk-serverless-apis).
 
 
-## Unit Testing
+## Developing actions
 
 Javascript actions are built via [grunt](https://gruntjs.com). This 
 includes local unit testing of action logic via 
@@ -18,7 +18,13 @@ includes local unit testing of action logic via
 [article](http://markdalgleish.com/2012/09/test-driven-node-js-development-with-grunt/)
 describes how to install and setup such projects.
 
+When developing an action, provide tests first, then build with `grunt`.
+
 ## Continuous integration testing
 
 Integration testing is don continuously via 
 [travis ci](https://travis-ci.org).
+
+You can test the remote action with the local script `local-test.sh`
+
+TODO: trigger unit tests via travis too?
