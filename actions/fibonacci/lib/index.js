@@ -3,6 +3,7 @@
  */
 
 var fibonacci = require('./fibonacci');
+var Promise = require('promise');
 
 /**
  * Error codes
@@ -27,21 +28,21 @@ function myAction(params) {
             reject(errors.e1);
         }
 
-        var i = parseInt(params.index);
+        var i = parseInt(params.index, 10);
 
         console.log('Calculating fibonacci number ' + i);
 
         var n = fibonacci.get(i);
 
-        if (n == -1) {
+        if (n === -1) {
             console.log(errors.e2);
             reject(errors.e2);
         } else {
             console.log("resulting number:" + n);
             resolve({
-                'index' : i,
-                'number' : n,
-                'provider' : params.PROVIDER_NAME
+                'index': i,
+                'number': n,
+                'provider': params.PROVIDER_NAME
             });
         }
 
