@@ -1,15 +1,8 @@
 /**
- * This function computes a fibonacci mumber
- *
- * @param   i fibonacci sequence index
- * @return  the fibonacci number
+ * Created by zirpins on 01.05.17.
  */
-function fibo(i) {
-    if (i < 1) return -1;
-    else if (i == 1) return 1;
-    else if (i == 2) return 1;
-    else return fibo(i - 1) + fibo(i - 2);
-}
+
+var fibonacci = require('fibonacci');
 
 /**
  * Error codes
@@ -36,7 +29,7 @@ function myAction(params) {
 
         console.log('Calculating fibonacci number ' + params.index);
 
-        var n = fibo(params.index);
+        var n = fibonacci.get(params.index);
 
         if (n == -1) {
             console.log(errors.e2);

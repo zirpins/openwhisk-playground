@@ -1,10 +1,37 @@
 {
   "name": "fibonacci",
-  "license": "MIT",
+  "description": "An action to compute fibonacci numbers.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/zirpins/openwhisk-playground",
+  "author": {
+    "name": "Christian Zirpins",
+    "email": "christian.zirpins@hs-karlsruhe.de"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/zirpins/openwhisk-playground.git"
   },
-  "version": "1.0.0",
-  "main": "index.js"
+  "bugs": {
+    "url": "https://github.com/zirpins/openwhisk-playground/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/zirpins/openwhisk-playground/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "lib/index.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt nodeunit"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.6.4",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt": "~0.4.5"
+  },
+  "keywords": []
 }
