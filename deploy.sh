@@ -22,7 +22,20 @@ function usage() {
 }
 
 function install() {
-  echo -e "Installing OpenWhisk actions, triggers, and rules for openwhisk-playground.."
+  # Exit if any command fails
+  set -e
+
+  echo -e "Installing OpenWhisk actions, triggers, and rules for openwhisk-serverless-apis..."
+
+  echo -e "Setting Bluemix credentials and logging in to provision API Gateway"
+
+  # Edit these to match your Bluemix credentials (needed to provision the API Gateway)
+  wsk bluemix login \
+    --user $BLUEMIX_USERNAME \
+    --password $BLUEMIX_PASSWORD \
+    --namespace $BLUEMIX_NAMESPACE
+
+  echo -e "\n"
 
   echo "Installing GET fibonacci Action"
   cd actions/fibonacci
@@ -37,9 +50,10 @@ function install() {
   # recover dev deps
   mv .mod node_modules
   # install zip in openwhisk
-  wsk action create fibonacci-get --kind nodejs:6 action.zip \
-    --param "PROVIDER_NAME" $PROVIDER_NAME
-  wsk api-experimental create /v1 /fibonacci get fibonacci-get
+  wsk action create fibonacci-get \
+    --kind nodejs:6 action.zip \
+    --web true
+  wsk api create -n "Fibonacci API" /v1 /fibonacci get fibonacci-get
   cd ../..
 
   echo -e "Install Complete"
@@ -49,7 +63,7 @@ function uninstall() {
   echo -e "Uninstalling..."
 
   echo "Removing API actions..."
-  wsk api-experimental delete /v1
+  wsk api delete /v1
 
   echo "Removing actions..."
   wsk action delete fibonacci-get
@@ -58,7 +72,9 @@ function uninstall() {
 }
 
 function showenv() {
-  echo -e MY_VARIABLE="$MY_VARIABLE"
+  echo -e BLUEMIX_USERNAME="$BLUEMIX_USERNAME"
+  echo -e BLUEMIX_PASSWORD="$BLUEMIX_PASSWORD"
+  echo -e BLUEMIX_PASSWORD="$BLUEMIX_NAMESPACE"
 }
 
 case "$1" in
