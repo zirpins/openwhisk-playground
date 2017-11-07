@@ -40,6 +40,7 @@ function install() {
   echo "Installing GET fibonacci Action"
   cd actions/fibonacci
   # preserve dev deps
+  mkdir -p node_modules
   mv node_modules .mod
   # install only prod deps
   npm install --only=production

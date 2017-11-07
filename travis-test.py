@@ -20,7 +20,6 @@ import json
 FIBONACCI_API_URL = os.environ['FIBONACCI_API_URL']
 print("FIBONACCI_API_URL is: " + FIBONACCI_API_URL)
 
-
 def main():
     checkBadIndex()
     checkFibonacci(25, 75025)
