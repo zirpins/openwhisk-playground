@@ -37,6 +37,9 @@ function install() {
 
   echo -e "\n"
 
+  echo "Creating a package"
+  wsk package create fibonacci_package
+
   echo "Installing GET fibonacci Action"
   cd actions/fibonacci
   # preserve dev deps
@@ -51,10 +54,10 @@ function install() {
   # recover dev deps
   mv .mod node_modules
   # install zip in openwhisk
-  wsk action create fibonacci-get \
+  wsk action create fibonacci_package/fibonacci-get \
     --kind nodejs:6 action.zip \
     --web true
-  wsk api create -n "Fibonacci API" /v1 /fibonacci get fibonacci-get
+  wsk api create -n "Fibonacci API" /v1 /fibonacci GET fibonacci_package/fibonacci-get
   cd ../..
 
   echo -e "Install Complete"
@@ -67,7 +70,10 @@ function uninstall() {
   wsk api delete /v1
 
   echo "Removing actions..."
-  wsk action delete fibonacci-get
+  wsk action delete fibonacci_package/fibonacci-get
+
+  echo "Removing package..."
+  wsk package delete fibonacci_package
 
   echo -e "Uninstall Complete"
 }

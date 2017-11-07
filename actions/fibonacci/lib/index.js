@@ -25,7 +25,15 @@ function myAction(params) {
 
         if (!params.index) {
             console.log(errors.e1);
-            reject(errors.e1);
+            reject({
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                statusCode: 502,
+                body: {
+                    'error': errors.e1
+                }
+            });
         }
 
         var i = parseInt(params.index, 10);
@@ -36,14 +44,28 @@ function myAction(params) {
 
         if (n === -1) {
             console.log(errors.e2);
-            reject(errors.e2);
+            reject({
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                statusCode: 502,
+                body: {
+                    'error': errors.e2
+                }
+            });
         } else {
             console.log("resulting number:" + n);
-            resolve({
-                'index': i,
-                'number': n,
-                'provider': params.PROVIDER_NAME
-            });
+            resolve(
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    statusCode: 200,
+                    body: {
+                        'index': i,
+                        'number': n
+                    }
+                });
         }
 
     });
