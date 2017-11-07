@@ -29,12 +29,14 @@ wsk property set --apihost openwhisk.ng.bluemix.net --auth $OPEN_WHISK_KEY > /de
 
 echo "Configure local.env"
 touch local.env #Configurations defined in travis-ci console
+source local.env
 
 echo "Deploying wsk actions, etc."
 ./deploy.sh --install
 
 echo "Find and set Fibonacci API URL"
 export FIBONACCI_API_URL=`wsk api list | grep fibonacci | awk '{print $5}'`
+export BLUEMIX_NAMESPACE
 
 echo "Running pythontests"
 python3 --version

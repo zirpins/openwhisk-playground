@@ -7,6 +7,8 @@ echo "Deploying wsk actions, etc."
 
 echo "Find and set Fibonacci API URL"
 export FIBONACCI_API_URL=`wsk api list | grep fibonacci | awk '{print $5}'`
+source local.env
+export BLUEMIX_NAMESPACE
 
 echo "Running pythontests"
 python3 travis-test.py

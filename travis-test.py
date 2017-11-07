@@ -20,7 +20,8 @@ import json
 FIBONACCI_API_URL = os.environ['FIBONACCI_API_URL']
 print("FIBONACCI_API_URL is: " + FIBONACCI_API_URL)
 
-FIBONACCI_API_WEB_URL = "https://openwhisk.ng.bluemix.net/api/v1/web/IWIbot_dev/fibonacci_package/fibonacci-get"
+FIBONACCI_API_WEB_URL = "https://openwhisk.ng.bluemix.net/api/v1/web/" \
+  + os.environ['BLUEMIX_NAMESPACE'] + "/fibonacci_package/fibonacci-get"
 print("FIBONACCI_API_WEB_URL is: " + FIBONACCI_API_WEB_URL)
 
 def main():
